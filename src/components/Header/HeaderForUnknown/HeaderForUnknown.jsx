@@ -7,11 +7,11 @@ function HeaderForUnknown() {
 
   return (
     <div
-      className={`headerForUser ${
-        location.pathname === "/" ? "headerForUser_promo" : ""
+      className={`headerForUnknown ${
+        location.pathname === "/" ? "headerForUnknown_promo" : ""
       }`}
     >
-      <div className="headerForUnknown__logo" />
+      <Link to="/" className="headerForUnknown__logo" />
       <div className="headerForUnknown__wrapper">
         <Link to="/signup" className="headerForUnknown__to-register">
           Регистрация

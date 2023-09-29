@@ -1,6 +1,8 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ isOn, handleToggle }) {
+function FilterCheckbox({ handleToggle }) {
+ let isOn = (true);
+
   return (
     <div className="filterCheckbox">
       <input
@@ -13,13 +15,17 @@ function FilterCheckbox({ isOn, handleToggle }) {
       <label
         style={{
           background:
-            //  isOn &&
+             isOn &&
             "#3DDC84",
         }}
         className="filterCheckbox__label"
         htmlFor={`filterCheckbox`}
       >
-        <span className={`filterCheckbox__button`} />
+        <span style={{
+          background:
+             isOn &&
+            "#fff",
+        }} className={`filterCheckbox__button`} />
         <span className="filterCheckbox__underscribe">Короткометражки</span>
       </label>
     </div>

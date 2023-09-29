@@ -7,11 +7,11 @@ import MoreButton from "./MoreButton/MoreButton";
 function Movies() {
   return (
     <>
-      <section className="movies">
+      <main className="movies">
         <SearchForm />
         <MoviesCardList name="movies" />
         <MoreButton />
-      </section>
+      </main>
     </>
   );
 }

@@ -12,7 +12,7 @@ function HeaderForUser({ handleOpenNavTab }) {
         location.pathname === "/" ? "headerForUser_promo" : ""
       }`}
     >
-      <div className="headerForUser__logo" />
+      <NavLink to="/" className="headerForUser__logo" />
       <div className="headerForUser__wrapper">
         <NavLink
           to="/movies"

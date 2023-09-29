@@ -11,7 +11,7 @@
   cursor: pointer;
   width: 36px;
   height: 20px;
-  background: grey;
+  background: #EBEBEB;
   border-radius: 100px;
   position: relative;
   transition: background-color 0.2s;
@@ -28,7 +28,7 @@
   height: 16px;
   border-radius: 45px;
   transition: 0.2s;
-  background: #fff;
+  background: #F5F5F5;
   box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 

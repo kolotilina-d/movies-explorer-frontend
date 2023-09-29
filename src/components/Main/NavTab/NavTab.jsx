@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function NavTab({ active, handleCloseNavTab, setIsNavActive }) {
   return (
-    <section className="navTab">
+    <div className="navTab">
       <div className={active ? "navTab__wrapper" : "navTab__wrapper-inactive"} onClick={() => setIsNavActive(false)}>
         <button className="navTab__close" onClick={() => handleCloseNavTab()}/>
         <nav className="navTab__list" onClick={(e) => e.stopPropagation()}>
@@ -38,7 +38,7 @@ function NavTab({ active, handleCloseNavTab, setIsNavActive }) {
           </div>
         </nav>
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -7,13 +7,13 @@ function Header({ handleOpenNavTab }) {
   const [isLogged] = useState(true);
 
   return (
-    <div className="header">
+    <header className="header">
       {isLogged ? (
         <HeaderForUser handleOpenNavTab={handleOpenNavTab}/>
       ) : (
         <HeaderForUnknown />
       )}
-    </div>
+    </header>
   );
 }
 

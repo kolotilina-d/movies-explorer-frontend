@@ -118,6 +118,7 @@
     padding: 42px 0 0;
     font-size: 18px;
     line-height: 1.1;
+    align-self: flex-start;
   }
 
   .aboutProject__text {
