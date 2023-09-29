@@ -9,7 +9,7 @@ function Header({ handleOpenNavTab }) {
   return (
     <div className="header">
       {isLogged ? (
-        <HeaderForUser handleOpenNavTab={handleOpenNavTab} />
+        <HeaderForUser handleOpenNavTab={handleOpenNavTab}/>
       ) : (
         <HeaderForUnknown />
       )}

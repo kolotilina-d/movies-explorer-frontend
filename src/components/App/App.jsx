@@ -31,6 +31,7 @@ function App() {
             element={
               <>
                 <Layout
+                  setIsNavActive={setIsNavActive}
                   isNavActive={isNavActive}
                   handleOpenNavTab={handleOpenNavTab}
                   handleCloseNavTab={handleCloseNavTab}
@@ -52,6 +53,7 @@ function App() {
             element={
               <>
                 <Layout
+                  setIsNavActive={setIsNavActive}
                   isNavActive={isNavActive}
                   handleOpenNavTab={handleOpenNavTab}
                   handleCloseNavTab={handleCloseNavTab}
@@ -73,6 +75,7 @@ function App() {
             element={
               <>
                 <Layout
+                  setIsNavActive={setIsNavActive}
                   isNavActive={isNavActive}
                   handleOpenNavTab={handleOpenNavTab}
                   handleCloseNavTab={handleCloseNavTab}
@@ -94,6 +97,7 @@ function App() {
             element={
               <>
                 <NavTab
+                  setIsNavActive={setIsNavActive}
                   active={isNavActive}
                   handleCloseNavTab={handleCloseNavTab}
                 />

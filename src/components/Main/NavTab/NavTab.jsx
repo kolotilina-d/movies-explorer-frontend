@@ -3,12 +3,12 @@ import "./NavTab.css";
 import LinkToProfile from "../../LinkToProfile/LinkToProfile";
 import { NavLink } from "react-router-dom";
 
-function NavTab({ active, handleCloseNavTab }) {
+function NavTab({ active, handleCloseNavTab, setIsNavActive }) {
   return (
     <section className="navTab">
-      <div className={active ? "navTab__wrapper" : "navTab__wrapper-inactive"}>
+      <div className={active ? "navTab__wrapper" : "navTab__wrapper-inactive"} onClick={() => setIsNavActive(false)}>
         <button className="navTab__close" onClick={() => handleCloseNavTab()}/>
-        <nav className="navTab__list">
+        <nav className="navTab__list" onClick={(e) => e.stopPropagation()}>
           <NavLink
             to="/"
             className={({ isActive }) =>
