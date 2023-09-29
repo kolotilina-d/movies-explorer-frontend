@@ -21,6 +21,13 @@
   font-size: 27px;
   font-weight: 500;
   color: #8b8b8b;
+  width: 100%;
+}
+
+.searchForm__input:focus {
+  outline: none !important;
+  border: none;
+  font-size: 20px;
 }
 
 .searchForm__button {
