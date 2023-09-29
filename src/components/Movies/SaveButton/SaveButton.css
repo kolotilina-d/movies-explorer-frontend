@@ -1,0 +1,19 @@
+.saveButton__buttons-icon {
+  background-image: url(../../../images/save_button.svg);
+  padding: 8px 8px;
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.saveButton__buttons-icon:hover {
+  opacity: 0.8;
+}
+
+.saveButton__buttons-icon:active {
+  background-color: #2be080;
+}
+
+.saveButton__button {
+  display: none;
+}

@@ -1,0 +1,27 @@
+.linkToProfile {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  line-height: 12px;
+  transition: opacity 1s;
+}
+
+.linkToProfile::after {
+  content: "";
+  background-image: url(../../images/akkaunt.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 6px 14px;
+  margin: 5px;
+  border-radius: 50%;
+}
+
+.linkToProfile:hover {
+  opacity: 0.7;
+}
+.linkToProfile_promo::after {
+  background-color: #0f4157;
+}
+.linkToProfile_user::after {
+  background-color: #313131;
+}

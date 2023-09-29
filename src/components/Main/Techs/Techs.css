@@ -1,0 +1,133 @@
+.techs {
+  margin: 0;
+  background-color: #272727;
+  padding: 0 70px;
+}
+
+.techs__title {
+  margin: 0;
+  padding: 102px 0 23px;
+  font-size: 22px;
+  border-bottom: 1px solid #dadada;
+  letter-spacing: -1px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.techs__subtitle {
+  margin: 0;
+  padding-top: 90px;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -1.7px;
+}
+
+.techs__text {
+  margin: 0 auto;
+  padding-top: 1px;
+  padding-top: 29px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 490px;
+  letter-spacing: -0.6px;
+}
+
+.techs__list {
+  padding: 100px 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+
+.techs__item {
+  width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #303030;
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 820px) {
+  .techs {
+    padding: 0 50px;
+    background-color: #202020;
+  }
+
+  .techs__title {
+    padding-top: 95px;
+    font-size: 22px;
+  }
+
+  .techs__subtitle {
+    padding: 80px 0 0;
+    letter-spacing: -2px;
+  }
+
+  .techs__text {
+    padding: 22px 100px 0;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: -0.3px;
+  }
+
+  .techs__list {
+    padding: 85px 0 90px;
+  }
+
+  .techs__item {
+    width: 84px;
+    height: 57px;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .techs {
+    padding: 0 18px 70px;
+  }
+
+  .techs__title {
+    padding: 38px 0 26px;
+    font-size: 18px;
+    border-bottom: 1px solid #000000;
+    letter-spacing: -0.7px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    padding: 50px 0 0;
+    letter-spacing: -1.2px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    padding: 13px 14px 0;
+    letter-spacing: -0.4px;
+    line-height: 16px;
+  }
+
+  .techs__list {
+    padding: 50px 75px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    grid-template-rows: 57px;
+    gap: 10px;
+  }
+
+  .techs__item {
+    width: 84px;
+    height: 57px;
+    letter-spacing: -0.5px;
+  }
+}
