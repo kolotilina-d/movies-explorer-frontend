@@ -1,0 +1,164 @@
+.headerForUser {
+  padding: 0 70px;
+  min-height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #202020;
+}
+
+.headerForUser_promo {
+  background-color: #073042;
+}
+
+.headerForUser__logo {
+  padding: 19px;
+  background-image: url("../../../images/header_logo.svg");
+  background-repeat: no-repeat;
+}
+
+.headerForUser__wrapper {
+  padding-left: 52px;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.headerForUser__to-link {
+  text-decoration: none;
+  color: white;
+  /* margin: 0 16px; */
+  font-size: 13px;
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 18px;
+  transition: opacity 1s;
+}
+
+.headerForUser__to-link-active {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.headerForUser__to-link:hover {
+  opacity: 0.7;
+}
+
+.headerForUser__user {
+  text-decoration: none;
+  color: white;
+  font-size: 13px;
+  line-height: 12px;
+  transition: opacity 1s;
+}
+
+.headerForUser__user::after {
+  content: "";
+  background-image: url(../../../images/akkaunt.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 6px 14px;
+  margin: 5px;
+  background-color: #0f4157;
+  border-radius: 50%;
+}
+
+.headerForUser__user:hover {
+  opacity: 0.7;
+}
+
+.headerForUser__nav {
+  display: none;
+}
+
+@media screen and (max-width: 820px) {
+  .headerForUser {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .headerForUser__wrapper {
+    display: none;
+  }
+
+  .headerForUser__profile-link {
+    display: none;
+  }
+
+  .headerForUser__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 1s;
+  }
+
+  .headerForUser__nav:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .headerForUser {
+    padding: 0 14px;
+  }
+}
+
+.navButton {
+  width: 13px;
+  height: 22px;
+  margin-right: 26px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 1s;
+}
+
+.navButton:hover {
+  opacity: 0.8;
+}
+
+.navButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 28px;
+  background-color: white;
+  height: 3px;
+}
+
+.navButton:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 28px;
+  background-color: white;
+  height: 3px;
+}
+
+.navButton__icon {
+  position: absolute;
+  top: 9px;
+  width: 28px;
+  background-color: white;
+  height: 3px;
+}
+
+@media screen and (max-width: 520px) {
+  .navButton::before {
+    width: 23px;
+  }
+
+  .navButton::after {
+    width: 23px;
+  }
+
+  .navButton__icon {
+    width: 23px;
+  }
+}

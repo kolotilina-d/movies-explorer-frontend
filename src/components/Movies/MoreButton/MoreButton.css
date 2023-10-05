@@ -1,0 +1,28 @@
+.moreButton {
+  padding: 52px 0 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moreButton__more {
+  width: 320px;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #202020;
+  border: 1px solid #424242;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.moviesCardList__more:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 520px) {
+  .moviesCardList__more-wrapper {
+    padding: 54px 0 76px;
+  }
+}
