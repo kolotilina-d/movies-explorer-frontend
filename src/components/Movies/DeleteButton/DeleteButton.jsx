@@ -1,11 +1,16 @@
 import React from "react";
 import "./DeleteButton.css";
 
-function DeleteButton() {
+function DeleteButton({ handleDeleteMovie }) {
   return (
     <div className="deleteButton">
-      <div className="deleteButton__buttons-icon"></div>
-      <button type="button" className="deleteButton__button"></button>
+      <div className="deleteButton__buttons-icon">
+        <button
+          type="button"
+          className="deleteButton__button"
+          onClick={handleDeleteMovie}
+        ></button>
+      </div>
     </div>
   );
 }

@@ -1,25 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import useValidator from "../../hooks/useValidator";
+import { EmailRegEx } from "../../utils/constans";
 
-function Register() {
+function Register({ onRegistration, isSuccess, setIsSuccess }) {
+  const { values, errors, handleInputChange, isFormValid } = useValidator();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegistration(values);
+  }
+
+  useEffect(() => {
+    setIsSuccess("");
+  }, [setIsSuccess, isFormValid]);
+
   return (
     <section className="register">
       <div className="register__wrapper">
-        <div className="register__logo" />
+        <NavLink to="/" className="register__logo" />
         <h2 className="register__title">Добро пожаловать!</h2>
-        <form className="register__form" name="register">
+        <form
+          className="register__form"
+          name="register"
+          onSubmit={handleSubmit}
+        >
           <span className="register__label">Имя</span>
           <input
-            name="login"
+            name="name"
             type="text"
             className="register__input"
             placeholder="Имя"
-            value="Виталий"
             required
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
+            value={values.name || ""}
+            onChange={handleInputChange}
           />
+          <span className="register__error_active">{errors.name}</span>
           <span className="register__label">E-mail</span>
           <input
             name="email"
@@ -27,36 +46,51 @@ function Register() {
             className="register__input"
             placeholder="Email"
             required
-            value="pochta@yandex.ru"
-            minlength="2"
-            maxlength="40"
+            value={values.email || ""}
+            pattern={EmailRegEx}
+            onChange={handleInputChange}
           />
+          <span className="register__error_active">{errors.email}</span>
           <span className="register__label">Пароль</span>
           <input
-            name="pass"
+            name="password"
             type="password"
             autoComplete="on"
-            className="register__input register__input_error-active"
+            className="register__input"
             placeholder="Пароль"
             required
-            value="pochta@yandex.ru"
-            minlength="2"
-            maxlength="8"
+            minLength="8"
+            maxLength="8"
+            value={values.password || ""}
+            onChange={handleInputChange}
           />
-          <span className="register__error register__error_active">
-            Что-то пошло не так...
+          <span className="register__error_active">{errors.password}</span>
+          <span
+            className={`register__error ${
+              isSuccess === "error"
+                ? "register__error_active"
+                : "register__error_successful"
+            }`}
+          >
+            {isSuccess === "error"
+              ? "Что-то пошло не так..."
+              : "Вы успешно зарегистрировались"}
           </span>
+
           <input
             type="submit"
-            className="register__submit"
+            className={`register__submit ${
+              !isFormValid ? "register__submit_inactive" : ""
+            }`}
             value={"Зарегистрироваться"}
+            disabled={!isFormValid}
           />
         </form>
         <span className="register__text">
           Уже зарегистрированы?{" "}
-          <Link to="/signin" className="register__link-to-login">
+          <NavLink to="/signin" className="register__link-to-login">
             Войти
-          </Link>
+          </NavLink>
         </span>
       </div>
     </section>

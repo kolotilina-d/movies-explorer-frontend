@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Header.css";
 import HeaderForUnknown from "./HeaderForUnknown/HeaderForUnknown";
 import HeaderForUser from "./HeaderForUser/HeaderForUser";
 
-function Header({ handleOpenNavTab }) {
-  const [isLogged] = useState(true);
-
+function Header({ handleOpenNavTab, isLogged }) {
   return (
     <header className="header">
       {isLogged ? (
-        <HeaderForUser handleOpenNavTab={handleOpenNavTab}/>
+        <HeaderForUser handleOpenNavTab={handleOpenNavTab} />
       ) : (
         <HeaderForUnknown />
       )}

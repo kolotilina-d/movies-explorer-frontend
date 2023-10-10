@@ -17,12 +17,12 @@
   border-radius: 6px;
 }
 
-.moviesCardList__more:hover {
+.moreButton__more:hover {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 520px) {
-  .moviesCardList__more-wrapper {
+  .mmoreButton__more-wrapper {
     padding: 54px 0 76px;
   }
 }

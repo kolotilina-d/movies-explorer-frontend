@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import useValidator from "../../hooks/useValidator";
+import { EmailRegEx } from "../../utils/constans";
 
-function Login() {
+function Login({ onLogin, setIsSuccess, isSuccess }) {
+  const { values, errors, handleInputChange, isFormValid } = useValidator();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(values);
+  }
+
+  useEffect(() => {
+    setIsSuccess("");
+  }, [setIsSuccess, isFormValid]);
+
   return (
     <section className="login">
       <div className="login__wrapper">
-        <div className="login__logo" />
+        <NavLink to="/" className="login__logo" />
         <h2 className="login__title">Рады видеть!</h2>
-        <form className="login__form" name="login">
+        <form className="login__form" name="login" onSubmit={handleSubmit}>
           <span className="login__label">E-mail</span>
           <input
             name="email"
@@ -16,29 +29,50 @@ function Login() {
             className="login__input"
             placeholder="Email"
             required
-            value="pochta@yandex.ru"
-            minlength="2"
-            maxlength="40"
+            value={values.email || ""}
+            pattern={EmailRegEx}
+            onChange={handleInputChange}
           />
+          <span className="login__error_active">{errors.email}</span>
           <span className="login__label">Пароль</span>
           <input
-            name="pass"
+            name="password"
             type="password"
             autoComplete="on"
             className="login__input "
             required
-            value=""
-            minlength="2"
-            maxlength="8"
+            minLength="8"
+            maxLength="8"
+            placeholder="Пароль"
+            value={values.password || ""}
+            onChange={handleInputChange}
           />
-          <span className="login__error ">Что-то пошло не так...</span>
-          <input type="submit" className="login__submit" value={"Войти"} />
+          <span className="login__error_active">{errors.password}</span>
+          <span
+            className={`login__error ${
+              isSuccess === "error"
+                ? "login__error_active"
+                : "login__error_successful"
+            }`}
+          >
+            {isSuccess === "error"
+              ? "Что-то пошло не так..."
+              : "Вы успешно зарегистрировались"}
+          </span>
+          <input
+            type="submit"
+            className={`login__submit ${
+              !isFormValid ? "login__submit_inactive" : ""
+            }`}
+            value={"Войти"}
+            disabled={!isFormValid}
+          />
         </form>
         <span className="login__text">
           Ещё не зарегистрированы?{" "}
-          <Link to="/signup" className="login__link-to-register">
+          <NavLink to="/signup" className="login__link-to-register">
             Регистрация
-          </Link>
+          </NavLink>
         </span>
       </div>
     </section>
