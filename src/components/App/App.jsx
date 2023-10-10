@@ -100,7 +100,7 @@ function App() {
   }
 
   function handleOnLogOut() {
-    localStorage.removeItem("jwt");
+    localStorage.clear()
     setIsLogged(false);
   }
 

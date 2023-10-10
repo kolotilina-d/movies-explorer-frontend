@@ -21,9 +21,9 @@ function Movies({
 
   const filter = useCallback((query, isChecked, movies) => {
     setQuery(query);
-    localStorage.setItem("movie", JSON.stringify(query));
-    localStorage.setItem("shorts", JSON.stringify(isChecked));
-    localStorage.setItem("allmovies", JSON.stringify(movies));
+    localStorage.setItem("query", JSON.stringify(query));
+    localStorage.setItem("isChecked", JSON.stringify(isChecked));
+    localStorage.setItem("movies", JSON.stringify(movies));
     setFilteredMovies(
       movies.filter((movie) => {
         const movieRu = String(movie.nameRU).toLowerCase().trim();
@@ -45,11 +45,11 @@ function Movies({
     if (isChecked) {
       setIsChecked(false);
       filter(query, false, movies);
-      localStorage.setItem("shorts", JSON.stringify(false));
+      localStorage.setItem("isChecked", JSON.stringify(false));
     } else {
       setIsChecked(true);
       filter(query, true, movies);
-      localStorage.setItem("shorts", JSON.stringify(true));
+      localStorage.setItem("isChecked", JSON.stringify(true));
     }
   }
 
@@ -68,13 +68,18 @@ function Movies({
   }
 
   useEffect(() => {
-    if (localStorage.allmovies !== 0) {
-      const movies = JSON.parse(localStorage.allmovies);
-      const query = JSON.parse(localStorage.movie);
-      const isChecked = JSON.parse(localStorage.shorts);
-      filter(query, isChecked, movies);
-    }
-  }, [filter]);
+    if (localStorage.getItem('movies')) {
+      const movies = JSON.parse(
+        localStorage.getItem('movies')
+      );
+      setMovies(movies);
+      if (
+        localStorage.getItem('isChecked') === 'true'
+      ) {
+        setIsChecked(isChecked);
+      } else {
+        setFilteredMovies(movies);
+    }}}, [isChecked])
 
   return (
     <>
