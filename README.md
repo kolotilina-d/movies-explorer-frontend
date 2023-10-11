@@ -3,3 +3,5 @@
 выбран макет dark-5
 # ссылка на Pull request
 https://github.com/kolotilina-d/movies-explorer-frontend/pull/2
+# ссылка на проект
+movie.kolotilina.nomoredomainsrocks.ru
