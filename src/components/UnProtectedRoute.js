@@ -5,5 +5,9 @@ export default function ProtectedRoute({
   isLogged,
   ...props
 }) {
-  return isLogged ? <Component {...props} /> : <Navigate to={"/"} replace />;
+  return !isLogged ? (
+    <Component {...props} />
+  ) : (
+    <Navigate to={"/movies"} replace />
+  );
 }

@@ -78,3 +78,7 @@
     padding: 54px 0 76px;
   }
 }
+
+.moreButton__more_hide {
+  opacity: 0;
+}

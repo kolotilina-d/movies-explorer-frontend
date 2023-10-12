@@ -9,6 +9,7 @@ function SearchForm({
   handleClickCheckbox,
   isChecked,
   isSuccess,
+  isSubmit,
 }) {
   const { values, handleInputChange } = useValidator();
 
@@ -34,7 +35,11 @@ function SearchForm({
             onChange={handleInputChange}
             value={values.searchMovie || ""}
           />
-          <button className="searchForm__button" type="submit" />
+          <button
+            className="searchForm__button"
+            type="submit"
+            disabled={isSubmit}
+          />
         </div>
         <span
           className={`searchForm__error ${

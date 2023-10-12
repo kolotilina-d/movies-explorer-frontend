@@ -4,12 +4,16 @@ import { NavLink } from "react-router-dom";
 import useValidator from "../../hooks/useValidator";
 import { EmailRegEx } from "../../utils/constans";
 
-function Register({ onRegistration, isSuccess, setIsSuccess }) {
+function Register({ onRegistration, isSuccess, setIsSuccess, isSubmit }) {
   const { values, errors, handleInputChange, isFormValid } = useValidator();
 
   function handleSubmit(e) {
     e.preventDefault();
-    onRegistration(values);
+    if (isSubmit) {
+      return;
+    } else {
+      onRegistration(values);
+    }
   }
 
   useEffect(() => {

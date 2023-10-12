@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 
-function Profile({ onEditUser, onLogOut, isSave }) {
+function Profile({ onEditUser, onLogOut, isSave, isSubmit }) {
   const currentUser = useContext(CurrentUserContext);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +12,6 @@ function Profile({ onEditUser, onLogOut, isSave }) {
   const [state, setState] = useState(false);
 
   function handleNameChange(e) {
-    setIsButtonCorrect(true);
     setUserName(e.target.value);
   }
 
@@ -36,8 +35,17 @@ function Profile({ onEditUser, onLogOut, isSave }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onEditUser(userName, email);
+    if (isSubmit) {
+      return;
+    } else {
+      onEditUser(userName, email);
+    }
   }
+  useEffect(() => {
+    const stateIfSameValue =
+      currentUser.name === userName && currentUser.email === email;
+    stateIfSameValue ? setIsButtonCorrect(false) : setIsButtonCorrect(true);
+  }, [currentUser.email, currentUser.name, email, userName]);
 
   return (
     <main className="profile">

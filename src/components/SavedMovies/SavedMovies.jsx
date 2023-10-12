@@ -51,7 +51,8 @@ function SavedMovies({
 
   useEffect(() => {
     setFilteredMovies(savedMovies);
-  }, [savedMovies]);
+    filter(query, isChecked, savedMovies);
+  }, [filter, isChecked, query, savedMovies]);
 
   return (
     <section className="savedMovies">

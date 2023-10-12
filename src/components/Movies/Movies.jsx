@@ -18,6 +18,7 @@ function Movies({
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const filter = useCallback((query, isChecked, movies) => {
     setQuery(query);
@@ -54,32 +55,63 @@ function Movies({
   }
 
   function handleSearchMovies(query) {
+    setIsSubmit(true);
     setIsLoading(true);
-    getMovies()
-      .then((movie) => {
-        setMovies(movie);
-        filter(query, isChecked, movie);
-      })
-      .catch((err) => {
-        setIsSuccess("notFound");
-        console.error(`Ошибка при поиске фильмов ${err}`);
-      })
-      .finally(() => setIsLoading(false));
+    if (movies.length !== 0) {
+      filter(query, isChecked, movies);
+      setIsLoading(false);
+      setIsSubmit(false);
+    } else {
+      getMovies()
+        .then((movie) => {
+          setMovies(movie);
+          filter(query, isChecked, movie);
+        })
+        .catch((err) => {
+          setIsSuccess("notFound");
+          console.error(`Ошибка при поиске фильмов ${err}`);
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setIsSubmit(false);
+        });
+    }
   }
+  // function handleSearchMovies(query) {
+  //   setIsSubmit(true);
+  //   setIsLoading(true);
+  //   getMovies()
+  //     .then((movie) => {
+  //       setMovies(movie);
+  //       filter(query, isChecked, movie);
+  //     })
+  //     .catch((err) => {
+  //       setIsSuccess("notFound");
+  //       console.error(`Ошибка при поиске фильмов ${err}`);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //       setIsSubmit(false);
+  //     });
+  // }
 
   useEffect(() => {
-    if (localStorage.getItem('movies')) {
-      const movies = JSON.parse(
-        localStorage.getItem('movies')
-      );
+    if (
+      localStorage.getItem("movies") &&
+      localStorage.getItem("query") &&
+      localStorage.getItem("isChecked")
+    ) {
+      const movies = JSON.parse(localStorage.movies);
+      const query = JSON.parse(localStorage.query);
+      const isChecked = JSON.parse(localStorage.isChecked);
+      setQuery(query);
+      setIsChecked(isChecked);
       setMovies(movies);
-      if (
-        localStorage.getItem('isChecked') === 'true'
-      ) {
-        setIsChecked(isChecked);
-      } else {
-        setFilteredMovies(movies);
-    }}}, [isChecked])
+      filter(query, isChecked, movies);
+    } else {
+      return;
+    }
+  }, [filter]);
 
   return (
     <>
@@ -90,6 +122,7 @@ function Movies({
           isChecked={isChecked}
           setIsSuccess={setIsSuccess}
           isSuccess={isSuccess}
+          isSubmit={isSubmit}
         />
         {isLoading && <Preloader />}
         {!isLoading && (

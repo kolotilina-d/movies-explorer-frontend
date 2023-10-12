@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -21,17 +21,19 @@ import {
 } from "../../utils/MainApi";
 import { autorisation, autentification } from "../../utils/auth";
 import ProtectedRoute from "../ProtectedRoute";
+import UnProtectedRoute from "../UnProtectedRoute";
 
 function App() {
   const [isNavActive, setIsNavActive] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
   const [isLogged, setIsLogged] = useState(false);
+  const [isSave, setIsSave] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isSuccess, setIsSuccess] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const [isSave, setIsSave] = useState(false);
 
   function handleOpenNavTab() {
     setIsNavActive(true);
@@ -47,7 +49,7 @@ function App() {
         .then((data) => {
           setIsLogged(true);
           setCurrentUser(data);
-          navigate(location.pathname);
+          navigate(location.pathname, { replace: false });
         })
         .catch((err) => console.log(err));
 
@@ -60,11 +62,12 @@ function App() {
   }, [isLogged]);
 
   function handleLogin(email, pass) {
+    setIsSubmit(true);
     autorisation(email, pass)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLogged(true);
-        navigate("/movies");
+        navigate("/movies", { replace: [false] });
         Promise.all([getUser(res.token), getSavedMovies(res.token)])
           .then(([userInfo, userMovies]) => {
             setCurrentUser(userInfo);
@@ -79,6 +82,7 @@ function App() {
       })
       .finally(() => {
         setIsSuccess("ok");
+        setIsSubmit(true);
       })
       .catch((err) => {
         setIsSuccess("error");
@@ -87,12 +91,15 @@ function App() {
   }
 
   function handleRegistration({ name, email, password }) {
+    setIsSubmit(true);
+
     autentification({ name, email, password })
       .then(() => {
         handleLogin({ email, password });
         setIsSuccess("ok");
-        navigate("/movies");
+        navigate("/movies", { replace: [false] });
       })
+      .finally(() => setIsSubmit(false))
       .catch((err) => {
         setIsSuccess("error");
         console.log("Ошибка регистрации", err);
@@ -100,11 +107,12 @@ function App() {
   }
 
   function handleOnLogOut() {
-    localStorage.clear()
+    localStorage.clear();
     setIsLogged(false);
   }
 
   function handleEditUser(name, email) {
+    setIsSubmit(true);
     editUser(name, email, localStorage.jwt)
       .then((res) => {
         setCurrentUser(res);
@@ -112,7 +120,10 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка редактирования данных пользователя ${err}`);
       })
-      .finally(() => setIsSave(true));
+      .finally(() => {
+        setIsSave(true);
+        setIsSubmit(false);
+      });
   }
 
   function handleDeleteMovie(movie) {
@@ -259,6 +270,7 @@ function App() {
                     onEditUser={handleEditUser}
                     onLogOut={handleOnLogOut}
                     isSave={isSave}
+                    isSubmit={isSubmit}
                   />
                 </>
               }
@@ -266,25 +278,27 @@ function App() {
             <Route
               path="/signup"
               element={
-                <>
-                  <Register
-                    onRegistration={handleRegistration}
-                    isSuccess={isSuccess}
-                    setIsSuccess={setIsSuccess}
-                  />
-                </>
+                <UnProtectedRoute
+                  isLogged={isLogged}
+                  element={Register}
+                  onRegistration={handleRegistration}
+                  isSuccess={isSuccess}
+                  setIsSuccess={setIsSuccess}
+                  isSubmit={isSubmit}
+                />
               }
             />
             <Route
               path="/signin"
               element={
-                <>
-                  <Login
-                    onLogin={handleLogin}
-                    isSuccess={isSuccess}
-                    setIsSuccess={setIsSuccess}
-                  />
-                </>
+                <UnProtectedRoute
+                  isLogged={isLogged}
+                  element={Login}
+                  onLogin={handleLogin}
+                  isSuccess={isSuccess}
+                  setIsSuccess={setIsSuccess}
+                  isSubmit={isSubmit}
+                />
               }
             />
             <Route

@@ -4,10 +4,12 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 import {
   ADD_CARDS_BIG_SCREEN,
+  ADD_CARDS_MEDIUM_SCREEN,
   ADD_CARDS_SMALL_SCREEN,
   BIG_SCREEN,
   MEDIUM_SCREEN,
   QUANTITY_CARDS_BIG_SCREEN,
+  QUANTITY_CARDS_EXTRA_SMALL_SCREEN,
   QUANTITY_CARDS_MEDIUM_SCREEN,
   QUANTITY_CARDS_SMALL_SCREEN,
   SMALL_SCREEN,
@@ -33,6 +35,8 @@ function MoviesCardList({
         setInitialCards(QUANTITY_CARDS_MEDIUM_SCREEN);
       } else if (screenWidth >= SMALL_SCREEN) {
         setInitialCards(QUANTITY_CARDS_SMALL_SCREEN);
+      } else {
+        setInitialCards(QUANTITY_CARDS_EXTRA_SMALL_SCREEN);
       }
     };
 
@@ -48,6 +52,10 @@ function MoviesCardList({
     const screenWidth = window.innerWidth;
     if (screenWidth >= BIG_SCREEN) {
       setInitialCards(initialCards + ADD_CARDS_BIG_SCREEN);
+    } else if (screenWidth >= MEDIUM_SCREEN) {
+      setInitialCards(initialCards + ADD_CARDS_MEDIUM_SCREEN);
+    } else if (screenWidth >= MEDIUM_SCREEN) {
+      setInitialCards(initialCards + ADD_CARDS_SMALL_SCREEN);
     } else {
       setInitialCards(initialCards + ADD_CARDS_SMALL_SCREEN);
     }
