@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Errors() {
   const navigate = useNavigate();
   function goBack() {
-    navigate(-1);
+    navigate(-4);
   }
 
   return (

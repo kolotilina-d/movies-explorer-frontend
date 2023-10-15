@@ -67,7 +67,7 @@ function App() {
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLogged(true);
-        navigate("/movies", { replace: [false] });
+        navigate("/movies", { replace: false });
         Promise.all([getUser(res.token), getSavedMovies(res.token)])
           .then(([userInfo, userMovies]) => {
             setCurrentUser(userInfo);
