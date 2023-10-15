@@ -1,14 +1,14 @@
 import React from "react";
 import "./MoreButton.css";
 
-function MoreButton(handleMoreClick) {
-  function handleShowMore() {
-    handleMoreClick();
+function MoreButton(handleShowMore) {
+  function handleMoreClick() {
+    handleShowMore();
   }
 
   return (
     <div className="moreButton">
-      <button className="moreButton__more" onClick={() => handleShowMore}>
+      <button className="moreButton__more" onClick={() => handleMoreClick}>
         Ещё
       </button>
     </div>

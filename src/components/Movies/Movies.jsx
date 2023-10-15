@@ -77,23 +77,6 @@ function Movies({
         });
     }
   }
-  // function handleSearchMovies(query) {
-  //   setIsSubmit(true);
-  //   setIsLoading(true);
-  //   getMovies()
-  //     .then((movie) => {
-  //       setMovies(movie);
-  //       filter(query, isChecked, movie);
-  //     })
-  //     .catch((err) => {
-  //       setIsSuccess("notFound");
-  //       console.error(`Ошибка при поиске фильмов ${err}`);
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //       setIsSubmit(false);
-  //     });
-  // }
 
   useEffect(() => {
     if (
@@ -123,6 +106,7 @@ function Movies({
           setIsSuccess={setIsSuccess}
           isSuccess={isSuccess}
           isSubmit={isSubmit}
+          query={query}
         />
         {isLoading && <Preloader />}
         {!isLoading && (

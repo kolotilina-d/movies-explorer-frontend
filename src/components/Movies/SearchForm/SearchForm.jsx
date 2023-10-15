@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import useValidator from "../../../hooks/useValidator";
+import { useLocation } from "react-router-dom";
 
 function SearchForm({
   handleSearchMovies,
@@ -10,8 +11,11 @@ function SearchForm({
   isChecked,
   isSuccess,
   isSubmit,
+  savedMovies,
+  query,
 }) {
-  const { values, handleInputChange } = useValidator();
+  const { values, handleInputChange, resetForm } = useValidator();
+  const location = useLocation();
 
   function onSubmit(e) {
     e.preventDefault();
@@ -22,6 +26,15 @@ function SearchForm({
       setIsSuccess("error");
     }
   }
+
+  useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+      resetForm({ searchMovie: "" });
+    } else {
+      resetForm({ searchMovie: query });
+    }
+  }, [query, resetForm, location.pathname, savedMovies]);
+
   return (
     <div className="searchForm">
       <form className="searchForm__form" noValidate onSubmit={onSubmit}>

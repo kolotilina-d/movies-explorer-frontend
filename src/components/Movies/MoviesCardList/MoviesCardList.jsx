@@ -96,18 +96,13 @@ function MoviesCardList({
               );
             })}
       </ul>
-      {pathname !== "/movies" ? (
-        ""
+      {pathname === "/saved-movies" ? (
+        <></>
+      ) : sliceMovies.length === movies.length ? (
+        <></>
       ) : (
         <div className="moreButton">
-          <button
-            className={`moreButton__more ${
-              sliceMovies.length === movies.length
-                ? "moreButton__more_hide"
-                : ""
-            }`}
-            onClick={handleShowMore}
-          >
+          <button className={`moreButton__more`} onClick={handleShowMore}>
             Ещё
           </button>
         </div>
