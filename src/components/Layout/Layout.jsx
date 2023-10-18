@@ -9,6 +9,7 @@ function Layout({
   handleOpenNavTab,
   handleCloseNavTab,
   setIsNavActive,
+  isLogged,
 }) {
   return (
     <>
@@ -17,7 +18,11 @@ function Layout({
         handleCloseNavTab={handleCloseNavTab}
         setIsNavActive={setIsNavActive}
       />
-      <Header handleOpenNavTab={handleOpenNavTab} isNavActive={isNavActive} />
+      <Header
+        handleOpenNavTab={handleOpenNavTab}
+        isNavActive={isNavActive}
+        isLogged={isLogged}
+      />
       <Outlet />
       <Footer />
     </>

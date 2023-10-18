@@ -1,31 +1,28 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ handleToggle }) {
- let isOn = (true);
-
+function FilterCheckbox({ handleClickCheckbox, isChecked }) {
   return (
     <div className="filterCheckbox">
       <input
-        checked={isOn}
-        onChange={handleToggle}
+        checked={isChecked}
+        onChange={handleClickCheckbox}
         className="filterCheckbox__checkbox"
         id={`filterCheckbox`}
         type="checkbox"
       />
       <label
         style={{
-          background:
-             isOn &&
-            "#3DDC84",
+          background: isChecked && "#3DDC84",
         }}
         className="filterCheckbox__label"
         htmlFor={`filterCheckbox`}
       >
-        <span style={{
-          background:
-             isOn &&
-            "#fff",
-        }} className={`filterCheckbox__button`} />
+        <span
+          style={{
+            background: isChecked && "#fff",
+          }}
+          className={`filterCheckbox__button`}
+        />
         <span className="filterCheckbox__underscribe">Короткометражки</span>
       </label>
     </div>

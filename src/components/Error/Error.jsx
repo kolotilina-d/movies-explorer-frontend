@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 function Errors() {
   const navigate = useNavigate();
-  const goBack = () => navigate(-1);
+  function goBack() {
+    navigate(-4);
+  }
 
   return (
     <section className="errors">

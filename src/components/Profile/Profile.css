@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .profile__form {
@@ -11,6 +12,14 @@
   width: 410px;
   display: grid;
   grid-template: 50% 50%/50% 50%;
+}
+
+.profile__warning {
+  position: absolute;
+  opacity: 0;
+  color: rgb(131, 219, 131);
+  top: 400px;
+  font-size: 23px;
 }
 
 .profile__title {
@@ -62,6 +71,10 @@
   cursor: pointer;
 }
 
+.profile__edit_hide {
+  display: none;
+}
+
 .profile__edit:hover {
   opacity: 0.8;
 }
@@ -77,21 +90,22 @@
   position: absolute;
   transform: translateY(170px);
 }
-
-.profile__changes-safe {
+.profile__profile_button-visible {
   display: none;
+}
+.profile__profile_button-visible_on {
+  display: block;
 }
 
 .profile__changes-safe_active {
-  position: absolute;
+  margin: 220px 0 0;
   display: block;
   width: 410px;
   height: 46px;
-  background-color: #3456f3;
+  background-color: #4285f4;
   color: white;
   font-size: 14px;
   font-weight: 500;
-  transform: translateY(219px);
   border-radius: 3px;
   border: none;
   cursor: pointer;
@@ -102,7 +116,7 @@
 }
 
 .profile__changes-safe_inactive {
-  position: absolute;
+  margin: 220px 0 0;
   display: block;
   width: 410px;
   height: 46px;
@@ -110,7 +124,6 @@
   color: #c2c2c2;
   font-size: 14px;
   font-weight: 500;
-  transform: translateY(219px);
   border-radius: 3px;
   border: none;
 }
@@ -119,6 +132,7 @@
   margin: 16px 0 0;
   background-color: #202020;
   color: #ee3465;
+  text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   border: none;
@@ -126,8 +140,12 @@
   transition: opacity 1s;
 }
 
+.profile__exit_hide {
+  display: none;
+}
+
 .profile__exit:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 @media screen and (max-width: 820px) {

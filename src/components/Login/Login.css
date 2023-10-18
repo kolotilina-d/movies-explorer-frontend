@@ -65,12 +65,21 @@
   font-weight: 500;
 }
 
+.login__submit_inactive {
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
 .login__input_error-active {
   color: #ee3465;
 }
 
 .login__error {
   display: none;
+}
+
+.login__error_successful {
+  color: green;
 }
 
 .login__error_active {

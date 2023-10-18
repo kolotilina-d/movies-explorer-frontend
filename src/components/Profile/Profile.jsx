@@ -1,21 +1,73 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Profile.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { Link } from "react-router-dom";
 
-function Profile() {
+function Profile({ onEditUser, onLogOut, isSave, isSubmit }) {
+  const currentUser = useContext(CurrentUserContext);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isButtonActive, setIsButtonActive] = useState(false);
+  const [isButtonCorrect, setIsButtonCorrect] = useState(false);
+  const [state, setState] = useState(false);
+
+  function handleNameChange(e) {
+    setUserName(e.target.value);
+  }
+
+  function handleEmailChange(e) {
+    setIsButtonCorrect(true);
+    setEmail(e.target.value);
+  }
+
+  function handleButtonChangeUserData() {
+    setIsButtonActive(true);
+    setState(false);
+  }
+
+  useEffect(() => {
+    setUserName(currentUser.name);
+    setEmail(currentUser.email);
+    setIsButtonActive(false);
+    setIsButtonCorrect(false);
+    setState(true);
+  }, [currentUser]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (isSubmit) {
+      return;
+    } else {
+      onEditUser(userName, email);
+    }
+  }
+  useEffect(() => {
+    const stateIfSameValue =
+      currentUser.name === userName && currentUser.email === email;
+    stateIfSameValue ? setIsButtonCorrect(false) : setIsButtonCorrect(true);
+  }, [currentUser.email, currentUser.name, email, userName]);
+
   return (
-    <section className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
-      <form className="profile__form">
+    <main className="profile">
+      <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <span className="profile__label">Имя</span>
         <input
           type="text"
           className="profile__input"
-          id="login"
-          name="login"
+          id="username"
+          name="username"
           placeholder="Имя"
           required
-          value="Виталий"
+          minLength={2}
+          maxLength={40}
+          onChange={(e) => {
+            handleNameChange(e);
+            setIsButtonCorrect(true);
+          }}
+          value={userName || ""}
           autoComplete="on"
+          disabled={!isButtonActive}
         />
         <span className="profile__label">E-mail</span>
         <input
@@ -25,11 +77,25 @@ function Profile() {
           name="email"
           placeholder="E-mail"
           required
-          value="pochta@yandex.ru"
+          value={email || ""}
           autoComplete="on"
+          onChange={handleEmailChange}
+          disabled={!isButtonActive}
         />
       </form>
-      <button type="button" className="profile__edit">
+      <span
+        className="profile__warning"
+        style={state ? { opacity: "1" } : { opacity: "0" }}
+      >
+        {isSave ? "Изменения сохранены" : ""}
+      </span>
+      <button
+        type="button"
+        className={`profile__edit ${
+          isButtonActive ? "profile__edit_hide" : ""
+        }`}
+        onClick={handleButtonChangeUserData}
+      >
         Редактировать
       </button>
       <span
@@ -39,19 +105,38 @@ function Profile() {
       >
         При обновлении профиля произошла ошибка.
       </span>
-      <button
-        type="submit"
-        className="profile__changes-safe 
-        //profile__changes-safe_active 
-        //profile__changes-safe_inactive
-        "
+      <div
+        className={`profile__profile_button-visible ${
+          isButtonActive ? "profile__profile_button-visible_on" : ""
+        }`}
       >
-        Сохранить
-      </button>
-      <button type="submit" className="profile__exit">
+        <button
+          type="submit"
+          className={`profile__changes-safe_inactive ${
+            isButtonCorrect ? "profile__changes-safe_active" : ""
+          }
+        }`}
+          style={
+            isButtonCorrect
+              ? { backgroundColor: "#4285f4", color: "white" }
+              : {}
+          }
+          disabled={!isButtonCorrect}
+          onClick={handleSubmit}
+        >
+          Сохранить
+        </button>
+      </div>
+      <Link
+        to="/"
+        onClick={onLogOut}
+        className={`profile__exit ${
+          isButtonActive ? "profile__exit_hide" : ""
+        }`}
+      >
         Выйти из аккаунта
-      </button>
-    </section>
+      </Link>
+    </main>
   );
 }
 
